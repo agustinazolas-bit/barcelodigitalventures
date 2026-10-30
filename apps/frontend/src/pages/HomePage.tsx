@@ -1,25 +1,22 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import React, { useState, useEffect } from 'react';
-import { Header } from './components/Header';
-import { HeroSection } from './components/HeroSection';
-import { AboutSection } from './components/AboutSection';
-import { ServicesSection } from './components/ServicesSection';
-import { ProcessSection } from './components/ProcessSection';
-import { ContactSection } from './components/ContactSection';
-import { Footer } from './components/Footer';
-import { PrivacyModal } from './components/PrivacyModal';
-import { PresentationIntro } from './components/PresentationIntro';
-import { LanguageProvider, useLanguage } from './context/LanguageContext';
+import { Header } from '../components/Header';
+import { HeroSection } from '../components/HeroSection';
+import { AboutSection } from '../components/AboutSection';
+import { ServicesSection } from '../components/ServicesSection';
+import { ProcessSection } from '../components/ProcessSection';
+import { ContactSection } from '../components/ContactSection';
+import { Footer } from '../components/Footer';
+import { PrivacyModal } from '../components/PrivacyModal';
+import { useLanguage } from '../context/LanguageContext';
 import { ArrowUp } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
-function MainApp() {
+interface HomePageProps {
+  onReplayIntro?: () => void;
+}
+
+export const HomePage: React.FC<HomePageProps> = ({ onReplayIntro }) => {
   const { t } = useLanguage();
-  const [showIntro, setShowIntro] = useState<boolean>(true);
   const [privacyModalOpen, setPrivacyModalOpen] = useState(false);
   const [selectedService, setSelectedService] = useState<string>('');
   const [showFloatingTop, setShowFloatingTop] = useState(false);
@@ -47,17 +44,7 @@ function MainApp() {
 
   return (
     <div className="min-h-screen bg-black text-[#F6F1E7] selection:bg-[#C9A45C] selection:text-black antialiased">
-      {/* 
-        Presentation Intro Screen:
-        Displays the official transparent brand logo, the purpose line, 
-        and transitions to the main landing page with an elegant cinematic Fade-out.
-      */}
-      <PresentationIntro
-        show={showIntro}
-        onFinish={() => setShowIntro(false)}
-      />
-
-      {/* Top Navigation with Language Switcher */}
+      {/* Top Navigation with Language Switcher & Scroll Progress */}
       <Header />
 
       <main>
@@ -92,7 +79,7 @@ function MainApp() {
       {/* Footer */}
       <Footer
         onOpenPrivacyModal={() => setPrivacyModalOpen(true)}
-        onReplayIntro={() => setShowIntro(true)}
+        onReplayIntro={onReplayIntro}
       />
 
       {/* Floating Back-To-Top button */}
@@ -122,12 +109,4 @@ function MainApp() {
       />
     </div>
   );
-}
-
-export default function App() {
-  return (
-    <LanguageProvider>
-      <MainApp />
-    </LanguageProvider>
-  );
-}
+};
