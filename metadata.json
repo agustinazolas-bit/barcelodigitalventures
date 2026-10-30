@@ -1,0 +1,6 @@
+{
+  "name": "Barceló Digital Ventures",
+  "description": "Sitio web oficial de Barceló Digital Ventures - Ideas que se convierten en productos digitales. Soluciones con IA, diseño y confianza.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

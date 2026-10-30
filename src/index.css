@@ -1,0 +1,178 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bdv-black: #000000;
+  --color-bdv-gold: #C9A45C;
+  --color-bdv-gold-light: #DFC07D;
+  --color-bdv-gold-dark: #A5823E;
+  --color-bdv-gold-glow: rgba(201, 164, 92, 0.25);
+  --color-bdv-ivory: #F6F1E7;
+  --color-bdv-bronze: #76551F;
+  --color-bdv-bronze-light: #8E6B2A;
+  --color-bdv-gray-light: #B8B5AF;
+  --color-bdv-graphite: #242424;
+  --color-bdv-graphite-soft: #383838;
+
+  --font-serif: Georgia, Cambria, "Times New Roman", serif;
+  --font-sans: "Source Sans 3", system-ui, -apple-system, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: var(--font-sans);
+    color: var(--color-bdv-ivory);
+    background-color: var(--color-bdv-black);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Anti-jitter text rendering & font smoothing */
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Editorial Titles in Georgia 400 */
+  h1, h2, h3, .font-serif-bdv {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    letter-spacing: -0.015em;
+  }
+
+  /* Custom subtle scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #000000;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #76551F;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #C9A45C;
+  }
+}
+
+/* Custom decorative styles aligned with BDV Web Style Guide */
+.bdv-card {
+  border-radius: 8px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+.bdv-btn {
+  border-radius: 4px;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease, box-shadow 0.2s ease;
+  touch-action: manipulation;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+.bdv-btn-gold {
+  background-color: #C9A45C;
+  color: #000000;
+}
+
+.bdv-btn-gold:hover {
+  background-color: #DFC07D;
+  box-shadow: 0 0 16px rgba(201, 164, 92, 0.4);
+}
+
+.bdv-btn-bronze {
+  background-color: #76551F;
+  color: #F6F1E7;
+}
+
+.bdv-btn-bronze:hover {
+  background-color: #8E6B2A;
+  box-shadow: 0 4px 12px rgba(118, 85, 31, 0.3);
+}
+
+/* GPU Stabilized Elements */
+.stabilize-gpu {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+/* Hardware-accelerated GPU animations with will-change */
+@keyframes subtle-float {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -5px, 0);
+  }
+}
+
+@keyframes slow-spin {
+  from {
+    transform: rotate(0deg) translateZ(0);
+  }
+  to {
+    transform: rotate(360deg) translateZ(0);
+  }
+}
+
+@keyframes reverse-spin {
+  from {
+    transform: rotate(360deg) translateZ(0);
+  }
+  to {
+    transform: rotate(0deg) translateZ(0);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.35;
+    transform: scale(1) translateZ(0);
+  }
+  50% {
+    opacity: 0.65;
+    transform: scale(1.03) translateZ(0);
+  }
+}
+
+.animate-subtle-float {
+  animation: subtle-float 6s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-slow-spin {
+  animation: slow-spin 80s linear infinite;
+  will-change: transform;
+}
+
+.animate-reverse-spin {
+  animation: reverse-spin 60s linear infinite;
+  will-change: transform;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3.5s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .animate-slow-spin, .animate-reverse-spin, .animate-subtle-float, .animate-pulse-glow {
+    animation: none !important;
+  }
+}
