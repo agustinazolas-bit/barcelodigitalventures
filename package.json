@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "dev": "vite apps/frontend --port=3000 --host=0.0.0.0",
-    "build": "vite build apps/frontend",
+    "build": "vite build apps/frontend && mkdir -p apps/frontend/dist && cp -r dist/* apps/frontend/dist/",
     "preview": "vite preview apps/frontend",
     "clean": "rm -rf dist apps/frontend/dist",
     "lint": "tsc --noEmit -p apps/frontend/tsconfig.json && tsc --noEmit -p apps/backend/tsconfig.json && tsc --noEmit -p packages/shared/tsconfig.json",
