@@ -1,7 +1,8 @@
+
 import { HealthCheckResponse } from '@bdv/shared';
 import { jsonSuccess } from '../utils/response';
 
-export function handleHealthCheck(): Response {
+export function handleHealthCheck(request: Request): Response {
   const data: HealthCheckResponse = {
     status: 'ok',
     service: 'Barceló Digital Ventures API',
@@ -10,5 +11,5 @@ export function handleHealthCheck(): Response {
     timestamp: new Date().toISOString(),
   };
 
-  return jsonSuccess(data, 'BDV API operational');
+  return jsonSuccess(data, 'BDV API operational', 200, request);
 }
