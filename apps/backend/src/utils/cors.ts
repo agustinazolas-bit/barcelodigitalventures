@@ -13,16 +13,11 @@ export function getCorsHeaders(request: Request): Headers {
     headers.set('Vary', 'Origin');
   }
 
-  headers.set(
-    'Access-Control-Allow-Methods',
-    'GET, POST, OPTIONS'
-  );
-
+  headers.set('Access-Control-Allow-Methods', 'GET, OPTIONS');
   headers.set(
     'Access-Control-Allow-Headers',
     'Content-Type, Authorization, X-Requested-With'
   );
-
   headers.set('Access-Control-Max-Age', '86400');
 
   return headers;
@@ -34,3 +29,4 @@ export function handleOptions(request: Request): Response {
     headers: getCorsHeaders(request),
   });
 }
+
