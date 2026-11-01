@@ -14,9 +14,9 @@ export default {
     const method = request.method.toUpperCase();
 
     // CORS preflight requests
-    if (method === 'OPTIONS') {
-      return handleOptions();
-    }
+ if (method === 'OPTIONS') {
+  return handleOptions(request);
+}
 
     // Health check endpoint
     if (path === '/' || path === '/health' || path === '/api/health') {
