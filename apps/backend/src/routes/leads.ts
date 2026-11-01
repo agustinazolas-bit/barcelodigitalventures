@@ -1,7 +1,8 @@
+
 import { jsonSuccess } from '../utils/response';
 import { BDV_BRAND } from '@bdv/shared';
 
-export function handleGetServices(): Response {
+export function handleGetServices(request: Request): Response {
   return jsonSuccess(
     {
       company: BDV_BRAND.name,
@@ -24,6 +25,8 @@ export function handleGetServices(): Response {
         },
       ],
     },
-    'Lista de capacidades de Barceló Digital Ventures'
+    'Lista de capacidades de Barceló Digital Ventures',
+    200,
+    request
   );
 }
