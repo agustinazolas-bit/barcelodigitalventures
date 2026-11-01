@@ -22,9 +22,10 @@ export default defineConfig(() => {
       hmr: process.env.DISABLE_HMR !== 'true',
       watch: process.env.DISABLE_HMR === 'true' ? null : {},
     },
-    build: {
-      outDir: path.resolve(__dirname, '../../dist'),
-      emptyOutDir: true,
+build: {
+  outDir: path.resolve(__dirname, './dist'),
+  emptyOutDir: true,
+},
     },
   };
 });
