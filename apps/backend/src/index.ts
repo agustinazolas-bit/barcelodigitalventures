@@ -1,6 +1,7 @@
+
 import { handleOptions } from './utils/cors';
 import { jsonError } from './utils/response';
-import { handleHealthCheck, handleContactSubmission, handleGetServices } from './routes';
+import { handleHealthCheck, handleGetServices } from './routes';
 
 export interface Env {
   ENVIRONMENT?: string;
@@ -14,26 +15,28 @@ export default {
     const method = request.method.toUpperCase();
 
     // CORS preflight requests
- if (method === 'OPTIONS') {
-  return handleOptions(request);
-}
+    if (method === 'OPTIONS') {
+      return handleOptions(request);
+    }
 
     // Health check endpoint
-    if (path === '/' || path === '/health' || path === '/api/health') {
-      return handleHealthCheck();
+    if (
+      (path === '/' || path === '/health' || path === '/api/health') &&
+      method === 'GET'
+    ) {
+      return handleHealthCheck(request);
     }
 
-    // Contact form submission endpoint
-    if ((path === '/api/contact' || path === '/contact') && method === 'POST') {
-      return handleContactSubmission(request);
-    }
-
-    // Services / capabilities directory endpoint
+    // Services directory endpoint
     if (path === '/api/services' && method === 'GET') {
-      return handleGetServices();
+      return handleGetServices(request);
     }
 
     // Fallback 404
-    return jsonError(`Ruta no encontrada: ${method} ${path}`, 404);
+    return jsonError(
+      `Ruta no encontrada: ${method} ${path}`,
+      404,
+      request
+    );
   },
 };
