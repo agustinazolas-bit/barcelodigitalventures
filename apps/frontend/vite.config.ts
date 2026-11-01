@@ -9,6 +9,7 @@ const __dirname = path.dirname(__filename);
 
 export default defineConfig(() => {
   return {
+    root: __dirname,
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {
@@ -22,10 +23,9 @@ export default defineConfig(() => {
       hmr: process.env.DISABLE_HMR !== 'true',
       watch: process.env.DISABLE_HMR === 'true' ? null : {},
     },
-build: {
-  outDir: path.resolve(__dirname, './dist'),
-  emptyOutDir: true,
-},
+    build: {
+      outDir: path.resolve(__dirname, './dist'),
+      emptyOutDir: true,
     },
   };
 });
